@@ -1,0 +1,86 @@
+
+#mod_lightquiz_playercontainer {
+	text-align: center; 
+	color: #FFF;
+	font-size: 64px;
+    font-style: oblique;
+	/* margin-top: 1em; */
+	background: #ACACAC;
+	width: 640px;
+	height: 415px;
+	line-height: 415px;
+	/* -webkit-transition: height 1s; */
+}
+
+
+
+#mod_lightquiz_resultscontainer {
+	text-align: center; 
+	margin-top: 1em; 
+	background: #A4C63f;
+	width: 640px;
+	height: 415px;
+}
+
+.lightquiz_hidediv {
+	display: none;
+}
+.lightquiz_showdiv {
+	display: block;
+}
+
+
+.lightquiz_myattempts_headrow{
+	font-weight: bold;
+	text-align: center;
+}
+.lightquiz_myattempts_table{
+	border: 2px;
+}
+
+.mod_lightquiz_startfinish_button {
+width: 640px; 
+height: 80px; 
+font-size: xx-large;
+background-color: chartreuse;
+}
+
+.mod_lightquiz_startfinish_button:hover {
+	background-color: chartreuse;
+}
+.mod_lightquiz_startfinish_button:active {
+	background-color: chartreuse;
+}
+.mod_lightquiz_startfinish_button:focus {
+	background-color: chartreuse;
+}
+
+.mod_lightquiz_start_container {
+	width:100%; 
+	/*
+	margin-left: auto; 
+	margin-right: auto; 
+	*/
+	display: block;
+	}
+.mod_lightquiz_bigbutton {font-size: 32px; text-align: center;}
+.mod_lightquiz_container {
+/* text-align: center; */ 
+float: left; 
+padding-right: 20px;
+} 
+.mod_lightquiz_lightquiz_container{margin-left: auto;margin-right: auto; padding-top: 5px}
+
+div.mod_lightquiz_listbuttons {
+	display: block;
+	/*float: left;*/
+}
+.mod_lightquiz_listbuttons input[type="submit"]{
+	width: 400px;
+	/*float: left;*/
+}
+
+div.mod_lightquiz_actionbuttons {
+	display: flex;
+	float: right;
+}
