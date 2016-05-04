@@ -70,28 +70,7 @@ M.mod_lightquiz.playerhelper = {
 			rdiv.addClass('lightquiz_hidediv');
 		}
 		
-    	EC.init({
-    		app: M.mod_lightquiz.playerhelper.appid,
-    		accessToken: M.mod_lightquiz.playerhelper.accesstoken,
-    		playOptions: {
-    			container: usecontainer,
-    			showCloseButton: true,
-    			showWatchMode: opts['field001'],
-    			showSpeakMode: opts['field002'],
-    			showSpeakLite: opts['field005'],
-    			hiddenChallenge: opts['field004'],
-    			showLearnMode: opts['field003'],
-    			simpleUI: opts['field007'],
-    			socialShareUrl: "http://www.facebook.com",
-    			overrideNew: true,
-    			newPlayerMode: true
-    		},
-    		resultFunc:	function(results){ M.mod_lightquiz.playerhelper.handleresults(results);},
-    		errorMsg:	function(message){M.mod_lightquiz.playerhelper.handleerror(message);}
-    	});
-    	//console.log("finished init");
-		//console.log("accesstoken:" + M.mod_lightquiz.playerhelper.accesstoken);
-		//console.log("requesttoken:" + opts['requesttoken']);
+
     }, 
     
     handleresults: function(results) {
@@ -141,7 +120,7 @@ M.mod_lightquiz.playerhelper = {
 	startfinish: function(){
 		var thebutton = this.gY.one('#mod_lightquiz_startfinish_button');
 		if(thebutton.get('innerHTML') =='Start' || thebutton.get('innerHTML') =='Try Again'){
-			if(!EC.getReadyStatus()){return;}
+			//if(!EC.getReadyStatus()){return;}
 			this.play();
 			if(M.mod_lightquiz.playerhelper.resultsmode=='form' && M.mod_lightquiz.playerhelper.opts['lightbox'] ){
 				thebutton.removeClass('lightquiz_showdiv');
@@ -151,7 +130,7 @@ M.mod_lightquiz.playerhelper = {
 			}
 			this.showresultsdiv(false);
 		}else{
-			EC.getResults('M.mod_lightquiz.playerhelper.handleresults');
+			//EC.getResults('M.mod_lightquiz.playerhelper.handleresults');
 		}
 	
 	},
@@ -179,12 +158,12 @@ M.mod_lightquiz.playerhelper = {
     
 	login: function(){
 		//console.log('logginin');
-		EC.login(M.mod_lightquiz.playerhelper.accesstoken,M.mod_lightquiz.playerhelper.showresponse);
+		//EC.login(M.mod_lightquiz.playerhelper.accesstoken,M.mod_lightquiz.playerhelper.showresponse);
     },
 	
 	logout: function(){
 		console.log('logginout');
-		EC.logout(M.mod_lightquiz.playerhelper.showresponse);
+		//EC.logout(M.mod_lightquiz.playerhelper.showresponse);
     },
     
     showresponse: function(showtext){
