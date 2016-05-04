@@ -134,6 +134,8 @@ $hasattempts=false;
 //echo $renderer->show_ec_options();
 //$thumburl="http://demo.poodll.com/pluginfile.php/10/course/summary/pdclogo.jpg";
 //echo $renderer->show_ec_link($lightquiz->mediatitle, $thumburl, $lightquiz->mediaid);
+
+//WE choose not to show this for now  # Justin 20160504
 if($lightquiz->maxattempts == 0|| count($attempts)<$lightquiz->maxattempts){
 	echo $renderer->show_bigbutton($hasattempts);
 	echo $renderer->show_ec_box();
