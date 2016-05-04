@@ -136,12 +136,14 @@ $hasattempts=false;
 //echo $renderer->show_ec_link($lightquiz->mediatitle, $thumburl, $lightquiz->mediaid);
 
 //WE choose not to show this for now  # Justin 20160504
+/*
 if($lightquiz->maxattempts == 0|| count($attempts)<$lightquiz->maxattempts){
 	echo $renderer->show_bigbutton($hasattempts);
 	echo $renderer->show_ec_box();
 }else{
 	echo $renderer->show_exceededattempts($lightquiz,$attempts);
 }
+*/
 
 // Finish the page
 echo $renderer->footer();
