@@ -74,29 +74,11 @@ M.mod_lightquiz.playerhelper = {
     }, 
     
     handleresults: function(results) {
-    	var txt = '<h2>' + M.util.get_string('sessionresults','lightquiz') + '</h2>';
-    	txt += '<br />';
-    	txt += '<b>' + M.util.get_string('sessionactivetime','lightquiz') + ':  </b>' + results.activeTime  + ' seconds<br />';
-    	txt += '<b>' + M.util.get_string('data003','lightquiz') + ':  </b>' + results.totalActiveTime + ' seconds<br />';
-    	txt += '<b>' + M.util.get_string('data006','lightquiz') + ':  </b>' + results.linesWatched + '/' + results.linesTotal + '<br />';
-    	txt += '<b>' + M.util.get_string('data005','lightquiz') + ':  </b>' + results.linesRecorded + '<br />';
-    	txt += '<b>' + M.util.get_string('sessionscore','lightquiz') + ':  </b>' + Math.round(results.sessionScore * 100) + '%' + '<br />';
-    	txt += '<b>' + M.util.get_string('sessiongrade','lightquiz') + ':  </b>' + results.sessionGrade + '<br />';
-    	var completionrate = results.recordingComplete ? 1 : 0;
-    	//this won't work in litemode because data001 != recordablelines
-    	if(!M.mod_lightquiz.playerhelper.opts['field005'] && results.linesRecorded>0){
-    		completionrate = results.linesRecorded /results.linesTotal;
-    	}
-    	txt += '<b>' + M.util.get_string('compositescore','lightquiz') + ':  </b>' +Math.round(completionrate * (results.sessionScore * 100)) + '%<br />';
     	
-    	
-    	/*
-		for (i in results){
-			txt+= i +': '+results[i]+'<br />';
-		}
-		*/
 		console.log(results);
-		M.mod_lightquiz.playerhelper.showresponse(txt);
+		M.mod_lightquiz.playerhelper.ajaxpost(results);
+		
+		//M.mod_lightquiz.playerhelper.showresponse(txt);
 		if(M.mod_lightquiz.playerhelper.resultsmode=='form'){
 			M.mod_lightquiz.playerhelper.formpost(results);
 			//do the ui updates
