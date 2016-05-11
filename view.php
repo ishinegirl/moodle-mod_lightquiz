@@ -123,7 +123,7 @@ echo $renderer->show_intro($lightquiz, $cm);
 
 //if we have attempts and we are not a manager/teacher then lets show a summary of them
 $hasattempts=false;
-$attempts = $DB->get_records('lightquiz_attempt',array('userid'=>$USER->id,'lightquizid'=>$lightquiz->id));
+$attempts = $DB->get_records('lightquiz_attempt',array('userid'=>$USER->id,'lightquizid'=>$lightquiz->id), 'id DESC');
 if($attempts){
 	$hasattempts=true;
 	echo $renderer->show_myattempts($lightquiz, $attempts);

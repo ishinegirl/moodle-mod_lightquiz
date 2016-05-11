@@ -124,16 +124,10 @@ class mod_lightquiz_renderer extends plugin_renderer_base {
 		$htr->attributes = $headrow_attributes;
 		$h_date = new html_table_cell(get_string('date','lightquiz'));
 		$htr->cells[] = $h_date;
-		$h_activetime = new html_table_cell(get_string('activetime','lightquiz'));
-		$htr->cells[] = $h_activetime;
-		$h_completed = new html_table_cell(get_string('completed','lightquiz'));
-		$htr->cells[] = $h_completed;
-		$h_score = new html_table_cell(get_string('sessionscore','lightquiz'));
-		$htr->cells[] = $h_score;
-		$h_grade = new html_table_cell(get_string('sessiongrade','lightquiz'));
-		$htr->cells[] = $h_grade;
-		$h_compositescore = new html_table_cell(get_string('compositescore','lightquiz'));
-		$htr->cells[] = $h_compositescore;
+		$h_points = new html_table_cell(get_string('points','lightquiz'));
+		$htr->cells[] = $h_points;
+		$h_sessionscore = new html_table_cell(get_string('sessionscore','lightquiz'));
+		$htr->cells[] = $h_sessionscore;
 		$htmltable->data[]=$htr;
 
 		
@@ -144,27 +138,12 @@ class mod_lightquiz_renderer extends plugin_renderer_base {
 			//time created
 			$date = new html_table_cell(date("Y-m-d H:i:s",$attempt->timecreated));
 			$htr->cells[] = $date;
-			//active time
-			$activetime = new html_table_cell(gmdate("H:i:s",$attempt->activetime));
-			$htr->cells[] = $activetime;
-			//completed
-			$completionrate = $attempt->data007 ? 1 : 0;
-			//this won't work in field005 because data001 is for watchable, not recordable
-			if( !$lightquiz->field005 && $attempt->data005 > 0){
-				$completionrate = $attempt->data005 / $attempt->data001;
-			}
-			$completed = new html_table_cell($completionrate ? get_string('yes') : get_string('no'));
-			//$completed = $attempt->data005 . '/' . $attempt->data001;
-			$htr->cells[] = $completed;
-			//Score
-			$score = new html_table_cell($attempt->sessionscore);
+			//points / correct
+			$points = new html_table_cell($attempt->points);
+			$htr->cells[] = $points;
+			//Session Score
+			$score = new html_table_cell($attempt->sessionscore . '%');
 			$htr->cells[] = $score;
-			//Grade
-			$grade = new html_table_cell($attempt->sessiongrade);
-			$htr->cells[] = $grade;
-			//Composite Score
-			$compositescore = new html_table_cell(round($completionrate*$attempt->sessionscore,0) .'%');
-			$htr->cells[] = $compositescore;
 			$htmltable->data[]=$htr;
 		}
 		$html = $this->output->heading(get_string('myattempts','lightquiz'), 4);
