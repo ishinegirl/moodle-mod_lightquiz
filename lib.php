@@ -37,6 +37,16 @@ define('MOD_LIGHTQUIZ_GRADELATEST', 2);
 define('MOD_LIGHTQUIZ_GRADEAVERAGE', 3);
 define('MOD_LIGHTQUIZ_GRADENONE', 4);
 
+define('MOD_LIGHTQUIZ_INT_DATA1', 'data001');
+define('MOD_LIGHTQUIZ_INT_DATA2', 'data002');
+define('MOD_LIGHTQUIZ_INT_DATA3', 'data003');
+define('MOD_LIGHTQUIZ_TEXT_DATA1', 'data004');
+define('MOD_LIGHTQUIZ_TEXT_DATA2', 'data005');
+define('MOD_LIGHTQUIZ_TEXT_DATA3', 'data006');
+define('MOD_LIGHTQUIZ_BOOL_DATA1', 'data007');
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Moodle core API                                                            //

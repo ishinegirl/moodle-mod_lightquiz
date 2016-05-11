@@ -31,7 +31,7 @@ require_once(dirname(__FILE__).'/locallib.php');
 
 
 $id = optional_param('id', 0, PARAM_INT); // course_module ID, or
-$lqresult = optional_param('ecresult', '', PARAM_RAW); // JSON Data relayed by mod from EC
+$lqresult = optional_param('lqresult', '', PARAM_RAW); // JSON Data relayed by mod from EC
 
 //call so that we know we are who we said we are
 require_sesskey();
@@ -69,27 +69,39 @@ if(!$lq_data){
 	$params   = array($lightquiz->id, $USER->id);
 	$DB->set_field_select('lightquiz_attempt', 'status',0, $wheresql, $params);
 	
-	switch($lq_data['profile']){
-		default:
-		case 'squiz':
-			$sessiongrade ='';
-			$data001=$lq_data['totalquestions'];
-			$data002=$lq_data['totalcorrect'];
-			$sessiongrade="A";
-			$sessionscore=$lq_data['percentscore'];
-			break;
-	}
-
 	//create a new attempt
 	$attempt = new stdClass();
 	$attempt->status=1;//This is the current, ie most recent, attempt
 	$attempt->lightquizid=$lightquiz->id;
 	$attempt->userid=$USER->id;
-	$attempt->data001=$data001;
-	$attempt->data002=$data002;
-	$attempt->sessiongrade=$sessiongrade;
-	$attempt->sessionscore=$sessionscore;
+	$attempt->profile=$lq_data['profile'];
+	$attempt->{MOD_LIGHTQUIZ_INT_DATA1}=0;
+	$attempt->{MOD_LIGHTQUIZ_INT_DATA2}=0;
+	$attempt->{MOD_LIGHTQUIZ_INT_DATA3}=0;
+	$attempt->{MOD_LIGHTQUIZ_TEXT_DATA1}=null;
+	$attempt->{MOD_LIGHTQUIZ_TEXT_DATA2}=null;
+	$attempt->{MOD_LIGHTQUIZ_TEXT_DATA3}=null;
+	$attempt->{MOD_LIGHTQUIZ_BOOL_DATA1}=0;
+	$attempt->sessiongrade='-';
+	$attempt->sessionscore=0;
+	$attempt->points=0;
 	$attempt->timecreated=$updatetime;
+	
+	//Create attempt details that are different per profile
+	switch($lq_data['profile']){
+		
+		case 'squiz':
+			$attempt->{MOD_LIGHTQUIZ_INT_DATA1}=$lq_data['totalquestions'];
+			$attempt->{MOD_LIGHTQUIZ_INT_DATA2}=$lq_data['totalcorrect'];
+			$attempt->sessiongrade="-";
+			$attempt->points=$lq_data['totalcorrect'];
+			$attempt->sessionscore=$lq_data['percentscore'];
+			break;
+		default:
+			break;
+	}
+
+	//update database with the new attempt
 	$attemptid = $DB->insert_record('lightquiz_attempt',$attempt,true);
 	if($attemptid){
 		$attempt->id = $attemptid;
@@ -97,30 +109,7 @@ if(!$lq_data){
 		$attempt =false;
 		$message = 'failed to write attempt to db';
 	}
-/*	
 
-if($attempt && $attempt->status==1){
-	//add the answerids
-	$answerids = json_decode($ec_data['answeridsCount'],true);
-	//error_log(print_r($answerids,true));
-	$result=true;
-	foreach($answerids['answerids'] as $sound=>$answerid){
-		$phobj = new stdClass();
-		$phobj->attemptid = $attempt->id;
-		$phobj->lightquizid = $attempt->lightquizid;
-		$phobj->userid = $attempt->userid;
-		$phobj->answerid = $sound;
-		$phobj->chosenanswer = $answerid['badCount'];
-		$phobj->wascorrect = $answerid['goodCount'];
-		$phobj->timecreated = $updatetime;
-		$result = $DB->insert_record('lightquiz_phs', $phobj,true);
-		if(!$result){
-			$message = 'failed to write phenome data to db';
-			break;
-		}
-	}
-}
-*/
 
 //update the gradebook
 if($attempt){

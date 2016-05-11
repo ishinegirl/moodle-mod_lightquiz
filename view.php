@@ -87,6 +87,7 @@ $jsmodule = array(
 );
 //here we set up any info we need to pass into javascript
 $opts =Array(); 
+$opts['cmid'] =$cm->id; 
 $opts['mediaid'] =$lightquiz->mediaid; 
 $opts['field001'] =$lightquiz->field001==1;
 $opts['field002'] =$lightquiz->field002==1; 
@@ -122,13 +123,12 @@ echo $renderer->show_intro($lightquiz, $cm);
 
 //if we have attempts and we are not a manager/teacher then lets show a summary of them
 $hasattempts=false;
-//if(!has_capability('mod/lightquiz:manageattempts', $module_context)){
-	$attempts = $DB->get_records('lightquiz_attempt',array('userid'=>$USER->id,'lightquizid'=>$lightquiz->id));
-	if($attempts){
-		$hasattempts=true;
-		echo $renderer->show_myattempts($lightquiz, $attempts);
-	}
-//}
+$attempts = $DB->get_records('lightquiz_attempt',array('userid'=>$USER->id,'lightquizid'=>$lightquiz->id));
+if($attempts){
+	$hasattempts=true;
+	echo $renderer->show_myattempts($lightquiz, $attempts);
+}
+
 
 // Replace the following lines with your own code
 //echo $renderer->show_ec_options();

@@ -181,8 +181,14 @@ M.mod_lightquiz.playerhelper = {
 		}
 		return;
     },
+    
 	
 	ajaxpost: function(resultobj){
+		/* This and init are the most important functions in this module.js file
+		A lot of the other functions are junk left over from the mods former life as
+		the English Central mod */
+	
+	
     	var Y = M.mod_lightquiz.playerhelper.gY;
 		var opts = M.mod_lightquiz.playerhelper.opts;
 		
@@ -190,7 +196,7 @@ M.mod_lightquiz.playerhelper = {
 		//if(opts['preview']){return;}
 		
     	var uri  = 'ajaxfriend.php?id=' +  opts['cmid'] + 
-				'&ecresult=' +  encodeURIComponent(JSON.stringify(resultobj)) +
+				'&lqresult=' +  encodeURIComponent(JSON.stringify(resultobj)) +
     			'&sesskey=' + M.cfg.sesskey;
 		//we dhoul donly declare this callback once. but actually it blocks
 		Y.on('io:complete', M.mod_lightquiz.playerhelper.ajaxresult, Y,null);

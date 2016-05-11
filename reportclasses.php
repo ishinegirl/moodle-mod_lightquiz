@@ -246,7 +246,7 @@ class mod_lightquiz_attemptdetails_report extends  mod_lightquiz_base_report {
 class mod_lightquiz_allusers_report extends  mod_lightquiz_base_report {
 	
 	protected $report="allusers";
-	protected $fields = array('date','username','activetime','data006','data005','sessionscore','sessiongrade','compositescore');	
+	protected $fields = array('date','username','activetime','sessionscore','sessiongrade','compositescore');	
 	protected $headingdata = null;
 	protected $qcache=array();
 	protected $ucache=array();
@@ -291,7 +291,7 @@ class mod_lightquiz_allusers_report extends  mod_lightquiz_base_report {
 					break;
 				
 				case 'compositescore':
-						$completionrate = $record->recordingComplete ? 1 : 0;
+						$completionrate = 1; //just a hack to make this work for lightquiz (not EC) Justin
 						//this won't work in field005 because data001 is for watchable, not recordable
 						if(!$this->lightquiz->field005 && $record->data005 > 0){
 							$completionrate = $record->data005 / $record->data001;
@@ -336,11 +336,10 @@ class mod_lightquiz_allusers_report extends  mod_lightquiz_base_report {
 *
 *
 */
-
 class mod_lightquiz_allattempts_report extends  mod_lightquiz_base_report {
 	
 	protected $report="allattempts";
-	protected $fields = array('date', 'username','status','activetime','points','details','answerids','delete');
+	protected $fields = array('date', 'username','status','activetime','points','details','delete');
 	protected $headingdata = null;
 	protected $qcache=array();
 	protected $ucache=array();
@@ -358,7 +357,9 @@ class mod_lightquiz_allattempts_report extends  mod_lightquiz_base_report {
 					if($withlinks){
 						$theuser = $this->fetch_cache('user',$record->userid);
 						$ret = fullname($theuser);
-						if($withlinks){
+						//we do not have a good attemptdetails report yet
+						//so we &false Justin
+						if($withlinks && false){
 							$detailsurl = new moodle_url('/mod/lightquiz/reports.php', 
 								array('n'=>$record->lightquizid,
 								'report'=>'attemptdetails',
@@ -387,17 +388,7 @@ class mod_lightquiz_allattempts_report extends  mod_lightquiz_base_report {
 							$ret="";
 						}
 					break;
-				case 'answerids':
-					if($withlinks){
-						$answeridsurl =  new moodle_url('/mod/lightquiz/reports.php', 
-								array('n'=>$record->lightquizid,
-								'report'=>'answerids',
-								'userid'=>$record->userid,
-								'attemptid'=>$record->id));
-						$ret = html_writer::link($answeridsurl, get_string('answerids', 'lightquiz'));
-					}else{
-						$ret="";
-					}
+
 					
 					break;
 				case 'delete':
@@ -450,7 +441,6 @@ class mod_lightquiz_allattempts_report extends  mod_lightquiz_base_report {
 *
 *
 */
-
 class mod_lightquiz_answerids_report extends  mod_lightquiz_base_report {
 	
 	protected $report="answerids";
