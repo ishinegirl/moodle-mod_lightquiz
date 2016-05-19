@@ -165,8 +165,8 @@ M.mod_lightquiz.playerhelper = {
     	//console.log(returndata);
         var result = Y.JSON.parse(returndata);
         if(result.success){
-        	location.reload(true);
-			//console.log(result);
+        	//we used to reload the page ..but not any more
+        	//location.reload(true);
         }
     },
     

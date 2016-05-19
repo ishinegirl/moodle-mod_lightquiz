@@ -117,7 +117,7 @@ if($attempt){
 }
 
 //return a success/failure flag to browser
-if($attempt && $result){
+if($attempt ){
 	$message= "allgood";
 	$return =array('success'=>true,'message'=>$message);
 	echo json_encode($return);

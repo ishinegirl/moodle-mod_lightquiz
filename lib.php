@@ -73,7 +73,7 @@ function lightquiz_supports($feature) {
 
 
 /**
- * Create grade item for given Englsh Central
+ * Create grade item for given Lightquiz
  *
  * @category grade
  * @uses GRADE_TYPE_VALUE
@@ -203,11 +203,8 @@ function lightquiz_get_user_grades($lightquiz, $userid=0) {
 
     }
 
-	if($lightquiz->field005 !=1){
-		$overallgrade = '(a.sessionscore * (a.data005 * (1 / a.data001)))';
-	}else{
-		$overallgrade = '(a.sessionscore * a.data007)';
-	}
+	$overallgrade = 'a.sessionscore';
+
 
     if ($lightquiz->maxattempts==1 || $lightquiz->gradeoptions == MOD_LIGHTQUIZ_GRADELATEST) {
 
