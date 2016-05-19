@@ -78,7 +78,7 @@ M.mod_lightquiz.playerhelper = {
 		console.log(results);
 		M.mod_lightquiz.playerhelper.ajaxpost(results);
 		
-		//M.mod_lightquiz.playerhelper.showresponse(txt);
+		/*
 		if(M.mod_lightquiz.playerhelper.resultsmode=='form'){
 			M.mod_lightquiz.playerhelper.formpost(results);
 			//do the ui updates
@@ -91,7 +91,8 @@ M.mod_lightquiz.playerhelper = {
 			thebutton.set('innerHTML','Try Again');	
 		}else{
 			M.mod_lightquiz.playerhelper.ajaxpost(results);
-		}	
+		}
+		*/	
     },
 	
 	handleerror: function(message) {
