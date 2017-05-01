@@ -164,10 +164,9 @@ class mod_lightquiz_renderer extends plugin_renderer_base {
 		$bigbuttonhtml = html_writer::tag('button',$caption,  
 				array('type'=>'button','class'=>'mod_lightquiz_bigbutton yui3-button mod_lightquiz_startfinish_button',
 				'id'=>'mod_lightquiz_startfinish_button','onclick'=>'M.mod_lightquiz.playerhelper.startfinish()'));	
-		return html_writer::tag('div', $bigbuttonhtml, array('class'=>'mod_lightquiz_bigbutton_start_container','id'=>'mod_lightquiz_bigbutton_start_container'));
-				
+		return html_writer::tag('div', $bigbuttonhtml, array('class'=>'mod_lightquiz_bigbutton_start_container','id'=>'mod_lightquiz_bigbutton_start_container'));			
 	 }
-	
+	 
 	/**
      * OLD Show links into API
      */
@@ -175,7 +174,6 @@ class mod_lightquiz_renderer extends plugin_renderer_base {
 		$bigbuttonhtml = html_writer::tag('button','@@CAPTION@@',  
 				array('class'=>'mod_lightquiz_bigbutton yui3-button yui3-button-disabled mod_lightquiz_@@SIZECLASS@@_button',
 				'id'=>'mod_lightquiz_@@ID@@_button','onclick'=>'M.mod_lightquiz.helper.@@ONCLICK@@'));	
-				break;
 	
     	$results_callback = 'M.mod_lightquiz.playerhelper.showresponse()';
     	$links = array(
@@ -308,7 +306,6 @@ class mod_lightquiz_report_renderer extends plugin_renderer_base {
 			 echo $datarow . $newline;
 		}
         exit();
-        break;
 	}
 
 	public function render_section_html($sectiontitle, $report, $head, $rows, $fields) {
